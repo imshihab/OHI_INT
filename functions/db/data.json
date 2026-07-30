@@ -116,19 +116,19 @@
         "description": "We offer a full range of transport and logistics services to meet all the needs of your international business.",
         "items": [
             {
-                "icon": "ship",
+                "icon": "directions_boat",
                 "title": "Maritime Transport",
                 "description": "Full-service FCL and LCL shipping to major ports worldwide.",
                 "href": "/servicos#maritimo"
             },
             {
-                "icon": "plane",
+                "icon": "flight",
                 "title": "Air Transport",
                 "description": "Fast and efficient air freight solutions for urgent cargo worldwide.",
                 "href": "/servicos#aereo"
             },
             {
-                "icon": "truck",
+                "icon": "local_shipping",
                 "title": "Road Transport",
                 "description": "National and European road transport with our own fleet and trusted partners.",
                 "href": "/servicos#rodoviario"
@@ -140,19 +140,19 @@
                 "href": "/servicos#logistica"
             },
             {
-                "icon": "fileCheck",
-                "title": "Customs clearance",
+                "icon": "fact_check",
+                "title": "Customs Clearance",
                 "description": "Full-service customs clearance and international trade consulting.",
                 "href": "/servicos#aduaneiro"
             },
             {
-                "icon": "package",
+                "icon": "inventory_2",
                 "title": "Special Cargo",
                 "description": "Transportation of special and oversized cargo, and turnkey industrial projects.",
                 "href": "/servicos#projectos"
             },
             {
-                "icon": "house",
+                "icon": "moving",
                 "title": "Changes",
                 "description": "Residential and commercial removals with vans and specialized personnel in Portugal.",
                 "href": "/servicos#mudancas"
@@ -172,23 +172,23 @@
                 "label": "Industry"
             },
             {
-                "icon": "wine",
+                "icon": "wine_bar",
                 "label": "To feed"
             },
             {
-                "icon": "pill",
+                "icon": "medication",
                 "label": "Pharmaceutical"
             },
             {
-                "icon": "cpu",
+                "icon": "memory",
                 "label": "Technology"
             },
             {
-                "icon": "car",
+                "icon": "directions_car",
                 "label": "Automobile"
             },
             {
-                "icon": "shoppingBag",
+                "icon": "shopping_bag",
                 "label": "Retail"
             }
         ]
@@ -196,7 +196,7 @@
     "whyUs": {
         "badge": "Why Blue Logistics?",
         "heading": "Why Choose Us?",
-        "image": "/images/tracking-device.jpg",
+        "image": "/tracking-device.png",
         "items": [
             {
                 "number": "01",
@@ -224,7 +224,7 @@
         "badge": "Global Network",
         "heading": "Our Global Presence",
         "description": "Global coverage with trusted partners on every continent.",
-        "image": "/images/cargo-ship.jpg",
+        "image": "cargo-ship.png",
         "cities": [
             "Lisbon",
             "Harbor",
@@ -235,7 +235,7 @@
         ],
         "routes": [
             {
-                "icon": "ship",
+                "icon": "directions_boat",
                 "from": "Lisbon/Sines",
                 "to": "Rotterdam, Netherlands",
                 "mode": "Maritime",
@@ -243,7 +243,7 @@
                 "frequency": "Daily"
             },
             {
-                "icon": "ship",
+                "icon": "directions_boat",
                 "from": "Leixões",
                 "to": "Hamburg, Germany",
                 "mode": "Maritime",
@@ -251,7 +251,7 @@
                 "frequency": "3 times a week"
             },
             {
-                "icon": "ship",
+                "icon": "directions_boat",
                 "from": "Sines",
                 "to": "Shanghai, China",
                 "mode": "Maritime",
@@ -259,7 +259,7 @@
                 "frequency": "Weekly"
             },
             {
-                "icon": "plane",
+                "icon": "travel",
                 "from": "Lisbon",
                 "to": "New York, USA",
                 "mode": "Air",
@@ -267,7 +267,7 @@
                 "frequency": "Daily"
             },
             {
-                "icon": "truck",
+                "icon": "delivery_truck_bolt",
                 "from": "Harbor",
                 "to": "Madrid, Spain",
                 "mode": "Road",
@@ -275,7 +275,7 @@
                 "frequency": "Daily"
             },
             {
-                "icon": "truck",
+                "icon": "delivery_truck_bolt",
                 "from": "Lisbon",
                 "to": "Paris, France",
                 "mode": "Road",
@@ -311,7 +311,7 @@
     "cta": {
         "heading": "Ready to Optimize Your Logistics?",
         "description": "Get in touch and discover how we can boost your international business.",
-        "background": "/images/intermodal-terminal.jpg",
+        "background": "/intermodal-terminal.png",
         "primaryButton": {
             "text": "Contact Us",
             "href": "/contactos"
@@ -322,7 +322,7 @@
         }
     },
     "footer": {
-        "logo": "/logo/logo+legenda.png",
+        "logo": "/logo.png",
         "tagline": "Global logistics solutions with excellence and commitment.",
         "social": {
             "facebook": "https://www.facebook.com/share/1EVHJykqPW/?mibextid=wwXIfr",

@@ -1,16 +1,141 @@
-# React + Vite
+# Project Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## Prerequisites
 
-Currently, two official plugins are available:
+Before running this project, make sure you have the following installed:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Node.js** (v18 or newer recommended)
+- **npm** (comes with Node.js)
+- **Wrangler CLI**
 
-## React Compiler
+Install Wrangler globally:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install -g wrangler
+```
 
-## Expanding the Oxlint configuration
+Verify the installation:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```bash
+node -v
+npm -v
+wrangler --version
+```
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/imshihab/OHI_INT.git
+cd https://github.com/imshihab/OHI_INT.git
+```
+
+Install project dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## Important
+
+After cloning the repository for the **first time**, build the project once:
+
+```bash
+npm run build
+```
+
+This generates the initial `dist/` directory required by Wrangler.
+
+---
+
+## Running the Development Server
+
+Open **two terminal windows**.
+
+### Terminal 1 — Start the Vite development server
+
+```bash
+npm run dev
+```
+
+The application will be available at:
+
+```
+http://localhost:5173
+```
+
+---
+
+### Terminal 2 — Start Cloudflare Pages
+
+```bash
+wrangler pages dev dist
+```
+
+This serves the built application using the Cloudflare Pages runtime.
+
+---
+
+## Available Scripts
+
+### Start Vite Development Server
+
+```bash
+npm run dev
+```
+
+### Build the Project
+
+```bash
+npm run build
+```
+
+### Preview the Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+## Development Workflow
+
+After the initial setup:
+
+1. Start the Vite development server:
+
+   ```bash
+   npm run dev
+   ```
+
+2. In another terminal, start Cloudflare Pages:
+
+   ```bash
+   wrangler pages dev dist
+   ```
+
+3. Make your changes.
+
+4. If you modify Cloudflare-specific code or need an updated production build, rebuild:
+
+   ```bash
+   npm run build
+   ```
+
+---
+
+## Notes
+
+- Run `npm install` only once after cloning.
+- Run `npm run build` once before starting `wrangler pages dev`.
+- Keep **both terminals running** during development.
+- If dependencies change, run:
+
+  ```bash
+  npm install
+  ```

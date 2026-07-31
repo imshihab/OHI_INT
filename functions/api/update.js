@@ -40,9 +40,10 @@ export async function onRequestPost(context) {
     const body = await request.json();
     const { section, data } = body;
 
+
     if (!section || data === undefined || data === null) {
         return new Response(
-            JSON.stringify({ error: "Invalid payload" }),
+            JSON.stringify({ error: "Invalid payload. 'section' and 'data' are required." }),
             { status: 400, headers: { "Content-Type": "application/json" } }
         );
     }
@@ -54,15 +55,17 @@ export async function onRequestPost(context) {
 
         let merged = {};
         if (row) {
-            try { merged = JSON.parse(row.data); } catch { merged = {}; }
+            try {
+                merged = JSON.parse(row.data);
+            } catch {
+                merged = {};
+            }
         } else {
-            // Seed row on first write
             await env.DB.prepare(
                 "INSERT OR IGNORE INTO site_content (id, data) VALUES (1, ?)"
-            )
-                .bind("{}")
-                .run();
+            ).bind("{}").run();
         }
+
         merged[section] = data;
 
         await env.DB.prepare(
@@ -72,7 +75,7 @@ export async function onRequestPost(context) {
             .run();
 
         return new Response(
-            JSON.stringify({ ok: true, section }),
+            JSON.stringify({ ok: true, section, message: "Successfully updated." }),
             {
                 status: 200,
                 headers: {

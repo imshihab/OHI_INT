@@ -7,8 +7,8 @@ pages_output_dir = "./dist"
 # after the first `wrangler d1 create blue-logistics --local` to bootstrap the table.
 [[d1_databases]]
 binding = "DB"
-database_name = "Ohi-international"
-database_id = "Ohi-international"
+database_name = "OHI_INTDB"
+database_id = "feb86a54-2426-4f16-9115-60531cbc886b"
 
 [vars]
 SITE_TITLE = "OHI International"

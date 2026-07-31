@@ -177,6 +177,9 @@ export default function AdminEditor() {
 
     useEffect(() => {
         if (content && activeSection) {
+            if (content?.siteTitle) {
+                document.title = content.siteTitle;
+            }
             setSectionDraft(JSON.parse(JSON.stringify(content[activeSection] ?? {})));
         }
     }, [content, activeSection]);

@@ -11,9 +11,16 @@ import Network from "../components/Network";
 import Testimonials from "../components/Testimonials";
 import CTA from "../components/CTA";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
 
 export default function Landing() {
     const { data, loading } = useContent();
+
+    useEffect(() => {
+        if (data?.siteTitle) {
+            document.title = data.siteTitle;
+        }
+    }, [data?.siteTitle]);
 
     if (loading) {
         return (

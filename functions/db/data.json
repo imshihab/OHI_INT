@@ -24,7 +24,7 @@
             },
             {
                 "title": "Global Network",
-                "href": "#rede-global"
+                "href": "#network"
             },
             {
                 "title": "Insights",
@@ -37,7 +37,11 @@
         ]
     },
     "hero": {
-        "video": ["/Video/hero-video1.mp4","/Video/hero-video2.mp4","/Video/hero-video3.mp4"],
+        "video": [
+            "/Video/hero-video1.mp4",
+            "/Video/hero-video2.mp4",
+            "/Video/hero-video3.mp4"
+        ],
         "logo": "/logo1x1.png",
         "titlePart1": "OHI",
         "titlePart2": "International",

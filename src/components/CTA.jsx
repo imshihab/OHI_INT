@@ -120,7 +120,10 @@ export default function CTA({ data }) {
                                 className="ml-3 inline-flex"
                                 initial={{ x: 0 }}
                                 whileHover={{ x: 4 }}
-                                transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
+                                transition={{
+                                    duration: 0.3,
+                                    ease: EASE_OUT_EXPO,
+                                }}
                             >
                                 <Icon
                                     name="arrow_right_alt"

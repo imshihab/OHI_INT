@@ -77,7 +77,7 @@ const featureItemVariants = {
 
 export default function About({ data }) {
     return (
-        <div id="about" className="bg-white overflow-hidden">
+        <div className="bg-white overflow-hidden">
             <div className="container-custom">
                 <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
                     {/* Image column — slides in from the LEFT */}

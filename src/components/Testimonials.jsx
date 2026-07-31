@@ -78,11 +78,9 @@ const starVariants = {
     },
 };
 
-
 export default function Testimonials({ data }) {
     return (
         <div className="bg-secondary/30 relative overflow-hidden">
-
             <div className="container-custom relative">
                 {/* Header */}
                 <motion.div
@@ -126,7 +124,10 @@ export default function Testimonials({ data }) {
                             variants={item}
                             whileHover={{
                                 y: -10,
-                                transition: { duration: 0.3, ease: EASE_OUT_EXPO },
+                                transition: {
+                                    duration: 0.3,
+                                    ease: EASE_OUT_EXPO,
+                                },
                             }}
                             className="group relative rounded-3xl border border-gray-200 bg-white p-8 shadow-sm hover:border-primary/10 hover:shadow-2xl transition-all duration-500 overflow-hidden"
                         >
@@ -139,7 +140,10 @@ export default function Testimonials({ data }) {
                                     className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/5 group-hover:bg-primary transition-colors duration-500"
                                     whileHover={{
                                         rotate: [0, -8, 8, 0],
-                                        transition: { duration: 0.6, ease: EASE_OUT_EXPO },
+                                        transition: {
+                                            duration: 0.6,
+                                            ease: EASE_OUT_EXPO,
+                                        },
                                     }}
                                 >
                                     <Icon

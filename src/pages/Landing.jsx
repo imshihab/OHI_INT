@@ -35,23 +35,29 @@ export default function Landing() {
             <section className="section-padding">
                 <Services data={data.services} />
             </section>
-            <section className="section-padding bg-linear-to-br from-blue-950 via-blue-800 to-blue-600 relative overflow-hidden">
+            <section
+                id="about"
+                className="section-padding bg-linear-to-br from-blue-950 via-blue-800 to-blue-600 relative overflow-hidden"
+            >
                 {/* Decorative blur */}
                 <div className="absolute -top-32 -right-32 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
                 <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
 
                 <Sectors data={data.sectors} />
             </section>
-            <section className="section-padding">
+            <section id="services" className="section-padding">
                 <WhyUs data={data.whyUs} />
             </section>
-            <section className="section-padding">
+            <section id="network" className="section-padding">
                 <Network data={data.network} />
             </section>
-            <section className="section-padding">
+            <section id="insights" className="section-padding">
                 <Testimonials data={data.testimonials} />
             </section>
-            <section className="section-padding bg-linear-to-br from-blue-950 via-blue-800 to-blue-600 relative overflow-hidden">
+            <section
+                id="contactos"
+                className="section-padding bg-linear-to-br from-blue-950 via-blue-800 to-blue-600 relative overflow-hidden"
+            >
                 {/* Background */}
                 <div className="absolute inset-0">
                     <img
@@ -63,7 +69,6 @@ export default function Landing() {
                 </div>
                 <CTA data={data.cta} />
             </section>
-
 
             <section className="section-padding bg-linear-to-br from-blue-950 via-blue-800 to-blue-600 relative overflow-hidden text-white pb-0!">
                 <Footer data={data.footer} />

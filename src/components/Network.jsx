@@ -100,7 +100,7 @@ const routeVariants = {
 // ---------- Component ----------
 export default function Network({ data }) {
     return (
-        <div id="rede-global" className="bg-white relative overflow-hidden">
+        <div className="bg-white relative overflow-hidden">
             <div className="container-custom relative">
                 {/* Header */}
                 <motion.div

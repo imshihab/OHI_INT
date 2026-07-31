@@ -48,7 +48,7 @@ const cardVariants = {
 
 export default function Services({ data }) {
     return (
-        <div id="services" className="bg-secondary/30 overflow-hidden">
+        <div className="bg-secondary/30 overflow-hidden">
             <div className="container-custom">
                 <motion.div
                     className="text-center mb-16"

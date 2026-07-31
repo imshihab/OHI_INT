@@ -1,8 +1,5 @@
 {
     "siteTitle": "OHI International",
-    "primaryColor": "#082340",
-    "primaryLight": "#1a4d7a",
-    "accentColor": "#4fb3f7",
     "navbar": {
         "logo": "/logo.png",
         "cta": {

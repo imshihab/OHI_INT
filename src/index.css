@@ -6,6 +6,15 @@
     --color-primary: #082340;
     --color-primary-light: #1a4d7a;
     --color-accent: #4fb3f7;
+
+    /* Neobrutalist palette */
+    --color-neo-bg: #F5F2EB;
+    --color-neo-black: #121212;
+    --color-neo-yellow: #FACC15;
+    --color-neo-blue: #2563EB;
+    --color-neo-green: #22C55E;
+    --color-neo-red: #DC2626;
+    --color-neo-gray: #D4D4D4;
 }
 
 *,
@@ -169,4 +178,26 @@ body {
     padding-bottom: 0.75rem;
     padding-left: 2rem;
     padding-right: 2rem
+}
+
+/* Neobrutalist: hard drop shadows + base background */
+@layer base {
+    body {
+        background-color: var(--color-neo-bg);
+        color: var(--color-neo-black);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+@layer utilities {
+    .shadow-neo {
+        box-shadow: 4px 4px 0px 0px var(--color-neo-black);
+    }
+    .shadow-neo-sm {
+        box-shadow: 2px 2px 0px 0px var(--color-neo-black);
+    }
+    .shadow-neo-hover {
+        box-shadow: 6px 6px 0px 0px var(--color-neo-black);
+    }
 }

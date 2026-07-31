@@ -29,7 +29,7 @@ const containerVariants = {
         opacity: 1,
         transition: {
             staggerChildren: 0.22,
-            delayChildren: 0.4,
+            delayChildren: 0,
         },
     },
 };
@@ -84,6 +84,7 @@ const titleRightVariants = {
 
 export default function Hero({ data }) {
     const [seeds, setSeeds] = useState([]);
+    const [navReady, setNavReady] = useState(false);
     const prefersReducedMotion = useReducedMotion();
 
     useEffect(() => {
@@ -95,6 +96,16 @@ export default function Hero({ data }) {
             delay: Math.random() * 2,
         }));
         setSeeds(generated);
+    }, []);
+
+    useEffect(() => {
+        const onNavDone = () => setNavReady(true);
+        window.addEventListener("navbar-animation-complete", onNavDone);
+        const fallback = setTimeout(() => setNavReady(true), 1500);
+        return () => {
+            window.removeEventListener("navbar-animation-complete", onNavDone);
+            clearTimeout(fallback);
+        };
     }, []);
 
     const particleStyles = useMemo(
@@ -157,7 +168,7 @@ export default function Hero({ data }) {
                 className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6"
                 variants={containerVariants}
                 initial="hidden"
-                animate="show"
+                animate={navReady ? "show" : "hidden"}
             >
                 <motion.div
                     className="mb-4 sm:mb-6 md:mb-8"
@@ -179,13 +190,13 @@ export default function Hero({ data }) {
                 </motion.div>
 
                 <motion.h1
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-light text-white mb-3 sm:mb-4 tracking-wider text-center px-4"
+                    className="text-4xl sm:text-5xl md:text-6xl custom:text-5xl lg:text-7xl xl:text-8xl font-serif font-light text-white mb-3 sm:mb-4 tracking-wider text-center px-4"
                 >
                     <motion.span
                         className="inline-block"
                         variants={titleLeftVariants}
                         initial="hidden"
-                        animate="show"
+                        animate={navReady ? "show" : "hidden"}
                     >
                         {data.titlePart1}
                     </motion.span>
@@ -193,7 +204,7 @@ export default function Hero({ data }) {
                         className="inline-block ml-3 bg-linear-to-r from-white via-white to-white/70 bg-clip-text text-transparent"
                         variants={titleRightVariants}
                         initial="hidden"
-                        animate="show"
+                        animate={navReady ? "show" : "hidden"}
                     >
                         {data.titlePart2}
                     </motion.span>

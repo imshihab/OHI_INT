@@ -9,7 +9,7 @@ const navVariants = {
     show: {
         y: 0,
         opacity: 1,
-        transition: { duration: 1.2, ease: EASE_OUT_EXPO, delay: 0.1 },
+        transition: { duration: 0.6, ease: EASE_OUT_EXPO, delay: 0.05 },
     },
 };
 
@@ -18,8 +18,8 @@ const desktopLinksContainerVariants = {
     show: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.18,
-            delayChildren: 0.45,
+            staggerChildren: 0.08,
+            delayChildren: 0.2,
         },
     },
 };
@@ -30,13 +30,13 @@ const desktopLinkVariants = {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
-        transition: { duration: 1.1, ease: EASE_OUT_EXPO },
+        transition: { duration: 0.6, ease: EASE_OUT_EXPO },
     },
 };
 
 const ctaVariants = {
     hidden: { opacity: 0, y: -14 },
-    show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: EASE_OUT_EXPO, delay: 0.15 } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT_EXPO, delay: 0.1 } },
 };
 
 const mobileMenuVariants = {
@@ -48,21 +48,21 @@ const mobileMenuVariants = {
         opacity: 1,
         clipPath: "circle(150% at calc(100% - 40px) 40px)",
         transition: {
-            duration: 1.1,
+            duration: 0.6,
             ease: EASE_OUT_EXPO,
             when: "beforeChildren",
-            staggerChildren: 0.14,
-            delayChildren: 0.35,
+            staggerChildren: 0.08,
+            delayChildren: 0.2,
         },
     },
     exit: {
         opacity: 0,
         clipPath: "circle(0% at calc(100% - 40px) 40px)",
         transition: {
-            duration: 0.7,
+            duration: 0.4,
             ease: EASE_OUT_EXPO,
             when: "afterChildren",
-            staggerChildren: 0.05,
+            staggerChildren: 0.03,
             staggerDirection: -1,
         },
     },
@@ -70,8 +70,8 @@ const mobileMenuVariants = {
 
 const mobileHeaderVariants = {
     hidden: { opacity: 0, y: -10 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE_OUT_EXPO } },
-    exit: { opacity: 0, transition: { duration: 0.3 } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE_OUT_EXPO } },
+    exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
 const mobileLinkVariants = {
@@ -80,15 +80,15 @@ const mobileLinkVariants = {
         opacity: 1,
         x: 0,
         filter: "blur(0px)",
-        transition: { duration: 0.9, ease: EASE_OUT_EXPO },
+        transition: { duration: 0.5, ease: EASE_OUT_EXPO },
     },
-    exit: { opacity: 0, x: -16, transition: { duration: 0.4 } },
+    exit: { opacity: 0, x: -16, transition: { duration: 0.25 } },
 };
 
 const mobileFooterVariants = {
     hidden: { opacity: 0, y: 24 },
-    show: { opacity: 1, y: 0, transition: { duration: 1, ease: EASE_OUT_EXPO } },
-    exit: { opacity: 0, y: 16, transition: { duration: 0.4 } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT_EXPO } },
+    exit: { opacity: 0, y: 16, transition: { duration: 0.25 } },
 };
 
 export default function Navbar({ data }) {
@@ -109,6 +109,10 @@ export default function Navbar({ data }) {
         };
     }, [mobileOpen]);
 
+    const handleNavComplete = () => {
+        window.dispatchEvent(new CustomEvent("navbar-animation-complete"));
+    };
+
     const linkHover = prefersReducedMotion
         ? {}
         : { scale: 1.06, transition: { type: "spring", stiffness: 320, damping: 18 } };
@@ -123,33 +127,37 @@ export default function Navbar({ data }) {
                     scrolled ? "bg-white shadow-sm" : "bg-transparent"
                 }`}
             >
-                <div className="container-custom w-full">
+                <div className="nav-container w-full">
                     <div className="flex items-center justify-between w-full min-w-0">
-                        {/* Logo */}
                         <motion.a
                             href="/"
-                            className="shrink-0"
-                            whileHover={{ opacity: 0.8 }}
+                            className="shrink-0 block"
+                            whileHover={{ opacity: 0.85 }}
                             whileTap={{ scale: 0.97 }}
+                            transition={{ type: "spring", stiffness: 320, damping: 22 }}
                         >
                             <motion.img
                                 src={data?.logo}
                                 alt={data?.logoAlt || "Logo"}
-                                className={`max-w-full h-14 xs:h-16 md:h-18 custom:h-16 lg:h-20 w-auto object-contain transition-all duration-300 ${
+                                className={`max-w-full h-14 xs:h-16 md:h-18 custom:h-16 lg:h-20 w-auto object-contain will-change-transform ${
                                     scrolled ? "" : "brightness-0 invert"
                                 }`}
-                                initial={{ opacity: 0, x: -16 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 1.1, ease: EASE_OUT_EXPO, delay: 0.2 }}
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.9,
+                                    ease: EASE_OUT_EXPO,
+                                    delay: 0.15,
+                                }}
                             />
                         </motion.a>
 
-                        {/* Desktop Navigation */}
                         <motion.div
                             className="hidden lg:flex flex-1 items-center justify-center gap-6 lg:gap-9 min-w-0 overflow-hidden"
                             variants={desktopLinksContainerVariants}
                             initial="hidden"
                             animate="show"
+                            onAnimationComplete={handleNavComplete}
                         >
                             {data?.links?.map((link) => (
                                 <motion.a

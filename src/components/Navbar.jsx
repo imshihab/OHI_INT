@@ -1,11 +1,100 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Icon from "./Icon";
+
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
+
+const navVariants = {
+    hidden: { y: -24, opacity: 0 },
+    show: {
+        y: 0,
+        opacity: 1,
+        transition: { duration: 1.2, ease: EASE_OUT_EXPO, delay: 0.1 },
+    },
+};
+
+const desktopLinksContainerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.18,
+            delayChildren: 0.45,
+        },
+    },
+};
+
+const desktopLinkVariants = {
+    hidden: { opacity: 0, y: -14, filter: "blur(6px)" },
+    show: {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        transition: { duration: 1.1, ease: EASE_OUT_EXPO },
+    },
+};
+
+const ctaVariants = {
+    hidden: { opacity: 0, y: -14 },
+    show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: EASE_OUT_EXPO, delay: 0.15 } },
+};
+
+const mobileMenuVariants = {
+    hidden: {
+        opacity: 0,
+        clipPath: "circle(0% at calc(100% - 40px) 40px)",
+    },
+    show: {
+        opacity: 1,
+        clipPath: "circle(150% at calc(100% - 40px) 40px)",
+        transition: {
+            duration: 1.1,
+            ease: EASE_OUT_EXPO,
+            when: "beforeChildren",
+            staggerChildren: 0.14,
+            delayChildren: 0.35,
+        },
+    },
+    exit: {
+        opacity: 0,
+        clipPath: "circle(0% at calc(100% - 40px) 40px)",
+        transition: {
+            duration: 0.7,
+            ease: EASE_OUT_EXPO,
+            when: "afterChildren",
+            staggerChildren: 0.05,
+            staggerDirection: -1,
+        },
+    },
+};
+
+const mobileHeaderVariants = {
+    hidden: { opacity: 0, y: -10 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE_OUT_EXPO } },
+    exit: { opacity: 0, transition: { duration: 0.3 } },
+};
+
+const mobileLinkVariants = {
+    hidden: { opacity: 0, x: -28, filter: "blur(6px)" },
+    show: {
+        opacity: 1,
+        x: 0,
+        filter: "blur(0px)",
+        transition: { duration: 0.9, ease: EASE_OUT_EXPO },
+    },
+    exit: { opacity: 0, x: -16, transition: { duration: 0.4 } },
+};
+
+const mobileFooterVariants = {
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0, transition: { duration: 1, ease: EASE_OUT_EXPO } },
+    exit: { opacity: 0, y: 16, transition: { duration: 0.4 } },
+};
 
 export default function Navbar({ data }) {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [mounted, setMounted] = useState(false);
-    const [animateItems, setAnimateItems] = useState(false);
+    const prefersReducedMotion = useReducedMotion();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 20);
@@ -14,67 +103,85 @@ export default function Navbar({ data }) {
     }, []);
 
     useEffect(() => {
-        const timer = setTimeout(() => setMounted(true), 50);
-        return () => clearTimeout(timer);
-    }, []);
-
-    useEffect(() => {
         document.body.style.overflow = mobileOpen ? "hidden" : "";
-
-        if (mobileOpen) {
-            const timer = setTimeout(() => setAnimateItems(true), 50);
-            return () => clearTimeout(timer);
-        } else {
-            setAnimateItems(false);
-        }
-
         return () => {
             document.body.style.overflow = "";
         };
     }, [mobileOpen]);
 
+    const linkHover = prefersReducedMotion
+        ? {}
+        : { scale: 1.06, transition: { type: "spring", stiffness: 320, damping: 18 } };
+
     return (
         <>
-            <nav
+            <motion.nav
+                variants={navVariants}
+                initial="hidden"
+                animate="show"
                 className={`fixed inset-x-0 top-0 w-full overflow-x-hidden z-40 flex items-center h-26 transition-all duration-700 ease-out ${
-                    mounted
-                        ? "translate-y-0 opacity-100"
-                        : "-translate-y-4 opacity-0"
-                } ${scrolled ? "bg-white shadow-sm" : "bg-transparent"}`}
+                    scrolled ? "bg-white shadow-sm" : "bg-transparent"
+                }`}
             >
                 <div className="container-custom w-full">
                     <div className="flex items-center justify-between w-full min-w-0">
                         {/* Logo */}
-                        <a
+                        <motion.a
                             href="/"
-                            className="shrink-0 hover:opacity-80 transition-opacity duration-300"
+                            className="shrink-0"
+                            whileHover={{ opacity: 0.8 }}
+                            whileTap={{ scale: 0.97 }}
                         >
-                            <img
+                            <motion.img
                                 src={data?.logo}
                                 alt={data?.logoAlt || "Logo"}
                                 className={`max-w-full h-14 xs:h-16 md:h-18 custom:h-16 lg:h-20 w-auto object-contain transition-all duration-300 ${
                                     scrolled ? "" : "brightness-0 invert"
                                 }`}
+                                initial={{ opacity: 0, x: -16 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1.1, ease: EASE_OUT_EXPO, delay: 0.2 }}
                             />
-                        </a>
+                        </motion.a>
 
                         {/* Desktop Navigation */}
-                        <div className="hidden lg:flex flex-1 items-center justify-center gap-6 lg:gap-9 min-w-0 overflow-hidden">
+                        <motion.div
+                            className="hidden lg:flex flex-1 items-center justify-center gap-6 lg:gap-9 min-w-0 overflow-hidden"
+                            variants={desktopLinksContainerVariants}
+                            initial="hidden"
+                            animate="show"
+                        >
                             {data?.links?.map((link) => (
-                                <a
+                                <motion.a
                                     key={link.href}
                                     href={link.href}
-                                    className={`whitespace-nowrap text-sm text-center font-light tracking-wider uppercase transition-all duration-300 hover:opacity-70 ${
+                                    variants={desktopLinkVariants}
+                                    whileHover={linkHover}
+                                    whileTap={{ scale: 0.96 }}
+                                    className={`relative whitespace-nowrap text-sm text-center font-light tracking-wider uppercase transition-colors duration-300 hover:opacity-100 ${
                                         scrolled ? "text-primary" : "text-white"
                                     }`}
                                 >
                                     {link.title}
-                                </a>
+                                    <motion.span
+                                        className="absolute left-1/2 -translate-x-1/2 -bottom-1 h-px w-0 bg-current"
+                                        whileHover={{ width: "100%" }}
+                                        transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
+                                    />
+                                </motion.a>
                             ))}
-                        </div>
+                        </motion.div>
 
                         {/* CTA */}
-                        <div className="hidden lg:flex items-center shrink-0">
+                        <motion.div
+                            className="hidden lg:flex items-center shrink-0"
+                            variants={ctaVariants}
+                            initial="hidden"
+                            animate="show"
+                            whileHover={{ scale: 1.04 }}
+                            whileTap={{ scale: 0.96 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                        >
                             <a
                                 href={data?.cta?.href}
                                 className={`text-xs py-3 px-6 lg:px-8 whitespace-nowrap transition-all duration-300 ${
@@ -85,102 +192,112 @@ export default function Navbar({ data }) {
                             >
                                 {data?.cta?.text}
                             </a>
-                        </div>
+                        </motion.div>
 
                         {/* Mobile Menu Button */}
                         <div className="flex lg:hidden shrink-0">
-                            <button
+                            <motion.button
                                 onClick={() => setMobileOpen(true)}
                                 className={`p-2 ${
                                     scrolled ? "text-primary" : "text-white"
                                 }`}
                                 aria-label="Open menu"
+                                whileHover={{ scale: 1.1, rotate: 90 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ type: "spring", stiffness: 320, damping: 18 }}
                             >
                                 <Icon name="menu" size={24} />
-                            </button>
+                            </motion.button>
                         </div>
                     </div>
                 </div>
-            </nav>
+            </motion.nav>
 
             {/* Mobile Menu */}
-            <div
-                className={`fixed inset-0 w-screen overflow-x-hidden z-50 lg:hidden bg-white transition-opacity duration-300 ${
-                    mobileOpen
-                        ? "opacity-100 pointer-events-auto"
-                        : "opacity-0 pointer-events-none"
-                }`}
-            >
-                <div className="flex flex-col h-full">
-                    <div className="flex items-center justify-between p-6 border-b border-gray-100">
-                        <img
-                            src={data?.logo}
-                            alt={data?.logoAlt || "Logo"}
-                            className="h-12 w-auto max-w-full object-contain"
-                        />
-
-                        <button
-                            onClick={() => setMobileOpen(false)}
-                            className="p-2 text-primary rounded-lg hover:bg-gray-100"
-                            aria-label="Close menu"
-                        >
-                            <Icon name="close" size={24} />
-                        </button>
-                    </div>
-
-                    <div className="flex-1 px-6 py-8 overflow-y-auto">
-                        <div className="space-y-2">
-                            {data?.links?.map((link, index) => (
-                                <a
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setMobileOpen(false)}
-                                    style={{
-                                        transitionDelay: mobileOpen
-                                            ? `${index * 75}ms`
-                                            : "0ms",
-                                    }}
-                                    className={`block px-4 py-4 text-lg rounded-lg text-primary hover:bg-gray-50 transition-all duration-500 ${
-                                        animateItems
-                                            ? "translate-x-0 opacity-100"
-                                            : "-translate-x-8 opacity-0"
-                                    }`}
-                                >
-                                    {link.title}
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div
-                        className={`p-6 border-t border-gray-100 transition-all duration-700 ${
-                            animateItems
-                                ? "translate-y-0 opacity-100"
-                                : "translate-y-8 opacity-0"
-                        }`}
+            <AnimatePresence>
+                {mobileOpen && (
+                    <motion.div
+                        key="mobile-menu"
+                        variants={mobileMenuVariants}
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                        className="fixed inset-0 w-screen overflow-x-hidden z-50 lg:hidden bg-white"
                     >
-                        <a
-                            href={data?.cta?.href}
-                            onClick={() => setMobileOpen(false)}
-                            className="block w-full py-4 rounded-lg bg-blue-600 text-white text-center hover:bg-blue-700 transition-colors"
-                        >
-                            {data?.cta?.text}
-                        </a>
+                        <div className="flex flex-col h-full">
+                            <motion.div
+                                variants={mobileHeaderVariants}
+                                className="flex items-center justify-between p-6 border-b border-gray-100"
+                            >
+                                <img
+                                    src={data?.logo}
+                                    alt={data?.logoAlt || "Logo"}
+                                    className="h-12 w-auto max-w-full object-contain"
+                                />
 
-                        {data?.phone && (
-                            <div className="mt-6 flex justify-center">
-                                <a
-                                    href={`tel:${data.phone.replace(/\s+/g, "")}`}
-                                    className="flex items-center gap-2 text-gray-500 hover:text-primary"
+                                <motion.button
+                                    onClick={() => setMobileOpen(false)}
+                                    className="p-2 text-primary rounded-lg hover:bg-gray-100"
+                                    aria-label="Close menu"
+                                    whileHover={{ rotate: 90, scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    transition={{ type: "spring", stiffness: 280, damping: 18 }}
                                 >
-                                    <Icon name="language" size={18} />
-                                    <span>{data.phone}</span>
-                                </a>
+                                    <Icon name="close" size={24} />
+                                </motion.button>
+                            </motion.div>
+
+                            <div className="flex-1 px-6 py-8 overflow-y-auto">
+                                <div className="space-y-2">
+                                    {data?.links?.map((link) => (
+                                        <motion.a
+                                            key={link.href}
+                                            href={link.href}
+                                            variants={mobileLinkVariants}
+                                            onClick={() => setMobileOpen(false)}
+                                            whileHover={{ x: 6 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            transition={{
+                                                type: "spring",
+                                                stiffness: 320,
+                                                damping: 22,
+                                            }}
+                                            className="block px-4 py-4 text-lg rounded-lg text-primary hover:bg-gray-50"
+                                        >
+                                            {link.title}
+                                        </motion.a>
+                                    ))}
+                                </div>
                             </div>
-                        )}
-                    </div>
-                </div>
-            </div>
+
+                            <motion.div
+                                variants={mobileFooterVariants}
+                                className="p-6 border-t border-gray-100"
+                            >
+                                <a
+                                    href={data?.cta?.href}
+                                    onClick={() => setMobileOpen(false)}
+                                    className="block w-full py-4 rounded-lg bg-blue-600 text-white text-center hover:bg-blue-700 transition-colors"
+                                >
+                                    {data?.cta?.text}
+                                </a>
+
+                                {data?.phone && (
+                                    <div className="mt-6 flex justify-center">
+                                        <a
+                                            href={`tel:${data.phone.replace(/\s+/g, "")}`}
+                                            className="flex items-center gap-2 text-gray-500 hover:text-primary"
+                                        >
+                                            <Icon name="language" size={18} />
+                                            <span>{data.phone}</span>
+                                        </a>
+                                    </div>
+                                )}
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }

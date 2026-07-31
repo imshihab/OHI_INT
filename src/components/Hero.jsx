@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
 
@@ -20,6 +20,72 @@ function Particle({ style }) {
                 ease: "easeInOut",
             }}
         />
+    );
+}
+
+function VideoBackdrop({ video }) {
+    const sources = useMemo(() => {
+        if (Array.isArray(video)) {
+            return video.filter(Boolean);
+        }
+        if (typeof video === "string" && video.length > 0) {
+            return [video];
+        }
+        return [];
+    }, [video]);
+
+    const [index, setIndex] = useState(0);
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        setIndex((i) => (sources.length === 0 ? 0 : i % sources.length));
+    }, [sources]);
+
+    const handleEnded = () => {
+        if (sources.length > 1) {
+            setIndex((i) => (i + 1) % sources.length);
+        }
+    };
+
+    if (sources.length === 0) {
+        return (
+            <motion.div
+                className="absolute inset-0 bg-primary video-watermark-cover"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.6, ease: EASE_OUT_EXPO }}
+            />
+        );
+    }
+    return (
+        <motion.div
+            className="absolute inset-0 bg-primary video-watermark-cover overflow-hidden"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.6, ease: EASE_OUT_EXPO }}
+        >
+            <AnimatePresence mode="sync">
+                <motion.video
+                    key={sources[index] + "-" + index}
+                    ref={videoRef}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    autoPlay
+                    playsInline
+                    preload="auto"
+                    muted
+                    loop={sources.length === 1}
+                    onEnded={handleEnded}
+                    
+                    style={{ opacity: 0.7 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.7 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                >
+                    <source src={sources[index]} type="video/mp4" />
+                </motion.video>
+            </AnimatePresence>
+        </motion.div>
     );
 }
 
@@ -122,34 +188,7 @@ export default function Hero({ data }) {
 
     return (
         <section className="relative h-screen w-full overflow-hidden bg-primary">
-            <motion.div
-                className="absolute inset-0 bg-primary video-watermark-cover overflow-hidden"
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.6, ease: EASE_OUT_EXPO }}
-            >
-                <video
-                    className="absolute inset-0 w-full h-full object-cover"
-                    autoPlay
-                    playsInline
-                    preload="auto"
-                    muted
-                    loop
-                    style={{ opacity: 0.7 }}
-                    onError={(e) => {
-                        const video = e.currentTarget;
-                        const source = video.querySelector("source");
-                        if (source && !source.dataset.fallback) {
-                            source.dataset.fallback = "true";
-                            source.src =
-                                "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4";
-                            video.load();
-                        }
-                    }}
-                >
-                    <source src={data.video} type="video/mp4" />
-                </video>
-            </motion.div>
+            <VideoBackdrop video={data.video} />
 
             <div className="absolute inset-0 pointer-events-none">
                 {particleStyles.map((style, i) => (

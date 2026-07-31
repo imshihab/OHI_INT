@@ -1,12 +1,41 @@
+import { motion } from "framer-motion";
 import Icon from "./Icon";
 import SocialIcon from "./SocialIcons";
+
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.12,
+            delayChildren: 0.05,
+        },
+    },
+};
+
+const slideUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.9, ease: EASE_OUT_EXPO },
+    },
+};
 
 export default function Footer({ data }) {
     return (
         <footer className="gradient-bg text-white">
-            <div className="container-custom py-16">
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.15 }}
+                className="container-custom py-16"
+            >
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    <div className="lg:col-span-1">
+                    <motion.div variants={slideUpVariants} className="lg:col-span-1">
                         <img
                             alt="Footer logo"
                             className="h-14 w-auto object-contain mb-4 brightness-0 invert"
@@ -33,10 +62,10 @@ export default function Footer({ data }) {
                                 <SocialIcon name="instagram" size={18} />
                             </a>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {data.columns.map((col, i) => (
-                        <div key={i}>
+                        <motion.div key={i} variants={slideUpVariants}>
                             <h4 className="text-sm font-medium tracking-wider uppercase mb-4">
                                 {col.heading}
                             </h4>
@@ -85,11 +114,14 @@ export default function Footer({ data }) {
                                     ))}
                                 </ul>
                             )}
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
-                <div className="mt-16 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                <motion.div
+                    variants={slideUpVariants}
+                    className="mt-16 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8"
+                >
                     <div className="max-w-md w-full">
                         <h4 className="text-lg font-serif font-light mb-4">
                             {data.newsletter.heading}
@@ -115,7 +147,7 @@ export default function Footer({ data }) {
                         </form>
                     </div>
                     <a
-                        href="https://www.livroreclamacoes.pt/inicio/"
+                        href={data.complaintsBookUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:opacity-80 transition-opacity shrink-0"
@@ -126,15 +158,21 @@ export default function Footer({ data }) {
                             src={data.complaintsBookImage}
                         />
                     </a>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
             <div className="bg-black/20">
-                <div className="container-custom py-6">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.3 }}
+                    className="container-custom py-6"
+                >
                     <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                         <p className="text-white/50 text-sm font-light">© {data.copyright}</p>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </footer>
     );

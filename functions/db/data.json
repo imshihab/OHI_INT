@@ -37,7 +37,7 @@
         ]
     },
     "hero": {
-        "video": "/hero-video.mp4",
+        "video": ["/Video/hero-video1.mp4","/Video/hero-video2.mp4","/Video/hero-video3.mp4"],
         "logo": "/logo1x1.png",
         "titlePart1": "OHI",
         "titlePart2": "International",
@@ -386,6 +386,7 @@
             "placeholder": "your@email.com",
             "button": "Subscribe"
         },
+        "complaintsBookUrl": "https://www.livroreclamacoes.pt/inicio/",
         "complaintsBookImage": "/livro_reclamacoes.png",
         "complaintsBookAlt": "Electronic Complaints Book",
         "copyright": "2026 Blue Logistics, Ltd. All rights reserved."

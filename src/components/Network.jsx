@@ -74,7 +74,7 @@ export default function Network({ data }) {
                             <img
                                 src={data.image}
                                 alt="Commercial port"
-                                className="w-full h-[320px] md:h-[420px] object-cover"
+                                className="w-full h-80 md:h-105 object-cover"
                             />
                         </div>
 

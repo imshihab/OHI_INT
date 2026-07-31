@@ -74,7 +74,7 @@ export default function Navbar({ data }) {
                         </div>
 
                         {/* CTA */}
-                        <div className="hidden lg:flex items-center flex-shrink-0">
+                        <div className="hidden lg:flex items-center shrink-0">
                             <a
                                 href={data?.cta?.href}
                                 className={`text-xs py-3 px-6 lg:px-8 whitespace-nowrap transition-all duration-300 ${
@@ -88,7 +88,7 @@ export default function Navbar({ data }) {
                         </div>
 
                         {/* Mobile Menu Button */}
-                        <div className="flex lg:hidden flex-shrink-0">
+                        <div className="flex lg:hidden shrink-0">
                             <button
                                 onClick={() => setMobileOpen(true)}
                                 className={`p-2 ${

@@ -1,4 +1,5 @@
 import Icon from "./Icon";
+import SocialIcon from "./SocialIcons";
 
 export default function Footer({ data }) {
     return (
@@ -20,7 +21,7 @@ export default function Footer({ data }) {
                                 aria-label="Facebook"
                                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
                             >
-                                <Icon name="facebook" size={18} />
+                                <SocialIcon name="facebook" size={18} />
                             </a>
                             <a
                                 href={data.social.instagram}
@@ -29,7 +30,7 @@ export default function Footer({ data }) {
                                 aria-label="Instagram"
                                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
                             >
-                                <Icon name="instagram" size={18} />
+                                <SocialIcon name="instagram" size={18} />
                             </a>
                         </div>
                     </div>
@@ -46,7 +47,7 @@ export default function Footer({ data }) {
                                             href={`tel:${col.phone.replace(/\s/g, "")}`}
                                             className="flex items-center gap-3 text-white/60 hover:text-white transition-colors font-light text-sm"
                                         >
-                                            <Icon name="phone" size={16} />
+                                            <Icon name="phone" filled={false} size={16} />
                                             {col.phone}
                                         </a>
                                     </li>
@@ -55,13 +56,13 @@ export default function Footer({ data }) {
                                             href={`mailto:${col.email}`}
                                             className="flex items-center gap-3 text-white/60 hover:text-white transition-colors font-light text-sm"
                                         >
-                                            <Icon name="mail" size={16} />
+                                            <Icon name="mail" filled={false} size={16} />
                                             {col.email}
                                         </a>
                                     </li>
                                     <li>
                                         <div className="flex items-start gap-3 text-white/60 font-light text-sm">
-                                            <Icon name="mapPin" size={16} className="flex-shrink-0 mt-0.5" />
+                                            <Icon name="location_on" size={16} filled={false} className="shrink-0 mt-0.5" />
                                             <span>
                                                 {col.addressLine1}
                                                 <br />
@@ -107,7 +108,7 @@ export default function Footer({ data }) {
                             />
                             <button
                                 type="submit"
-                                className="px-6 py-3 bg-white text-primary hover:bg-gray-100 transition-colors text-sm tracking-wider uppercase font-light"
+                                className="px-6 py-3 bg-white text-primary hover:bg-gray-100 transition-colors text-sm tracking-wider uppercase font-light cursor-pointer"
                             >
                                 {data.newsletter.button}
                             </button>
@@ -117,10 +118,10 @@ export default function Footer({ data }) {
                         href="https://www.livroreclamacoes.pt/inicio/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:opacity-80 transition-opacity flex-shrink-0"
+                        className="hover:opacity-80 transition-opacity shrink-0"
                     >
                         <img
-                            alt="Electronic Complaints Book"
+                            alt={data.complaintsBookAlt}
                             className="h-16 w-auto object-contain brightness-0 invert"
                             src={data.complaintsBookImage}
                         />
@@ -132,17 +133,6 @@ export default function Footer({ data }) {
                 <div className="container-custom py-6">
                     <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                         <p className="text-white/50 text-sm font-light">© {data.copyright}</p>
-                        <p className="text-white/50 text-sm mt-4 md:mt-0 font-light">
-                            {data.credit.split("JF SOLUTECH")[0]}
-                            <a
-                                href={data.creditUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-white/70 hover:text-white transition-colors"
-                            >
-                                JF SOLUTECH
-                            </a>
-                        </p>
                     </div>
                 </div>
             </div>

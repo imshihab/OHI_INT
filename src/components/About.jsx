@@ -3,7 +3,7 @@ export default function About({ data }) {
         <section id="about" className="section-padding bg-white">
             <div className="container-custom">
                 <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    <div className="relative h-[300px] sm:h-[400px] md:h-[500px] order-2 md:order-1">
+                    <div className="relative h-75 sm:h-100 md:h-125 order-2 md:order-1">
                         <img
                             alt="Blue Logistics team in meeting"
                             className="w-full h-full object-cover"

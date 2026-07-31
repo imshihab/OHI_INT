@@ -59,13 +59,13 @@ export default function Landing() {
                         alt="Night intermodal terminal"
                         className="h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/85 to-primary-light/80" />
+                    <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/85 to-primary-light/80" />
                 </div>
                 <CTA data={data.cta} />
             </section>
 
 
-            <section className="section-padding bg-linear-to-br from-blue-950 via-blue-800 to-blue-600 relative overflow-hidden text-white">
+            <section className="section-padding bg-linear-to-br from-blue-950 via-blue-800 to-blue-600 relative overflow-hidden text-white pb-0!">
                 <Footer data={data.footer} />
             </section>
         </div>

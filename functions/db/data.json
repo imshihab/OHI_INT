@@ -386,9 +386,8 @@
             "placeholder": "your@email.com",
             "button": "Subscribe"
         },
-        "complaintsBookImage": "/images/livro_reclamacoes.png",
-        "copyright": "2026 Blue Logistics, Ltd. All rights reserved.",
-        "credit": "Developed with ❤️ by JF SOLUTECH",
-        "creditUrl": "https://jfsolutech.dev"
+        "complaintsBookImage": "/livro_reclamacoes.png",
+        "complaintsBookAlt": "Electronic Complaints Book",
+        "copyright": "2026 Blue Logistics, Ltd. All rights reserved."
     }
 }

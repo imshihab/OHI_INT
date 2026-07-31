@@ -75,7 +75,6 @@ function VideoBackdrop({ video }) {
                     muted
                     loop={sources.length === 1}
                     onEnded={handleEnded}
-                    
                     style={{ opacity: 0.7 }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 0.7 }}
@@ -123,7 +122,11 @@ const ctaContainerVariants = {
 
 const ctaVariants = {
     hidden: { opacity: 0, y: 24 },
-    show: { opacity: 1, y: 0, transition: { duration: 1.3, ease: EASE_OUT_EXPO } },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 1.3, ease: EASE_OUT_EXPO },
+    },
 };
 
 const titleLeftVariants = {
@@ -187,7 +190,10 @@ export default function Hero({ data }) {
     );
 
     return (
-        <section className="relative h-screen w-full overflow-hidden bg-primary">
+        <div
+            id="hero"
+            className="relative h-screen w-full overflow-hidden bg-primary"
+        >
             <VideoBackdrop video={data.video} />
 
             <div className="absolute inset-0 pointer-events-none">
@@ -228,9 +234,7 @@ export default function Hero({ data }) {
                     />
                 </motion.div>
 
-                <motion.h1
-                    className="text-4xl sm:text-5xl md:text-6xl custom:text-5xl lg:text-7xl xl:text-8xl font-serif font-light text-white mb-3 sm:mb-4 tracking-wider text-center px-4"
-                >
+                <motion.h1 className="text-4xl sm:text-5xl md:text-6xl custom:text-5xl lg:text-7xl xl:text-8xl font-serif font-light text-white mb-3 sm:mb-4 tracking-wider text-center px-4">
                     <motion.span
                         className="inline-block"
                         variants={titleLeftVariants}
@@ -283,7 +287,11 @@ export default function Hero({ data }) {
                             y: -2,
                         }}
                         whileTap={{ scale: 0.97 }}
-                        transition={{ type: "spring", stiffness: 320, damping: 18 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 320,
+                            damping: 18,
+                        }}
                     >
                         {data.primaryCta.text}
                     </motion.a>
@@ -298,7 +306,11 @@ export default function Hero({ data }) {
                             y: -2,
                         }}
                         whileTap={{ scale: 0.97 }}
-                        transition={{ type: "spring", stiffness: 320, damping: 18 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 320,
+                            damping: 18,
+                        }}
                     >
                         {data.secondaryCta.text}
                     </motion.a>
@@ -311,7 +323,11 @@ export default function Hero({ data }) {
                     <div className="w-6 h-10 border border-white/30 rounded-full flex justify-center mouse-scroll-container">
                         <motion.div
                             className="w-0.5 h-3 bg-white/70 rounded-full mt-2 scroll-mouse"
-                            animate={prefersReducedMotion ? {} : { y: [0, 14, 0], opacity: [1, 0, 1] }}
+                            animate={
+                                prefersReducedMotion
+                                    ? {}
+                                    : { y: [0, 14, 0], opacity: [1, 0, 1] }
+                            }
                             transition={{
                                 duration: 1.8,
                                 repeat: Infinity,
@@ -321,6 +337,6 @@ export default function Hero({ data }) {
                     </div>
                 </motion.div>
             </motion.div>
-        </section>
+        </div>
     );
 }

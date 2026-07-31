@@ -81,7 +81,7 @@ const starVariants = {
 
 export default function Testimonials({ data }) {
     return (
-        <section className="section-padding bg-secondary/30 relative overflow-hidden">
+        <div className="bg-secondary/30 relative overflow-hidden">
 
             <div className="container-custom relative">
                 {/* Header */}
@@ -199,6 +199,6 @@ export default function Testimonials({ data }) {
                     ))}
                 </motion.div>
             </div>
-        </section>
+        </div>
     );
 }

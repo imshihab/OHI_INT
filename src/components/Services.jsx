@@ -48,7 +48,7 @@ const cardVariants = {
 
 export default function Services({ data }) {
     return (
-        <div id="services" className="section-padding bg-secondary/30 overflow-hidden">
+        <div id="services" className="bg-secondary/30 overflow-hidden">
             <div className="container-custom">
                 <motion.div
                     className="text-center mb-16"
@@ -124,7 +124,10 @@ export default function Services({ data }) {
                                 className="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full bg-primary/10 blur-2xl"
                                 initial={{ opacity: 0, scale: 0.6 }}
                                 whileHover={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
+                                transition={{
+                                    duration: 0.6,
+                                    ease: EASE_OUT_EXPO,
+                                }}
                             />
 
                             {/* Icon tile */}
@@ -191,7 +194,11 @@ export default function Services({ data }) {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 1, ease: EASE_OUT_EXPO, delay: 0.3 }}
+                    transition={{
+                        duration: 1,
+                        ease: EASE_OUT_EXPO,
+                        delay: 0.3,
+                    }}
                 >
                     <motion.a
                         href={data.viewAllCta.href}
@@ -201,7 +208,11 @@ export default function Services({ data }) {
                             scale: 1.04,
                         }}
                         whileTap={{ scale: 0.97 }}
-                        transition={{ type: "spring", stiffness: 280, damping: 18 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 280,
+                            damping: 18,
+                        }}
                         className="btn border border-primary bg-transparent text-primary inline-block"
                     >
                         {data.viewAllCta.text}

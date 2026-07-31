@@ -77,7 +77,7 @@ const featureItemVariants = {
 
 export default function About({ data }) {
     return (
-        <section id="about" className="section-padding bg-white overflow-hidden">
+        <div id="about" className="bg-white overflow-hidden">
             <div className="container-custom">
                 <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
                     {/* Image column — slides in from the LEFT */}
@@ -91,7 +91,11 @@ export default function About({ data }) {
                         <motion.div
                             variants={mainImageVariants}
                             whileHover={{ scale: 1.03 }}
-                            transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 220,
+                                damping: 20,
+                            }}
                             className="w-full h-full overflow-hidden will-change-transform"
                         >
                             <motion.img
@@ -100,7 +104,10 @@ export default function About({ data }) {
                                 src={data.mainImage}
                                 initial={{ scale: 1.12 }}
                                 animate={{ scale: 1 }}
-                                transition={{ duration: 3.6, ease: EASE_OUT_EXPO }}
+                                transition={{
+                                    duration: 3.6,
+                                    ease: EASE_OUT_EXPO,
+                                }}
                             />
                         </motion.div>
 
@@ -109,7 +116,11 @@ export default function About({ data }) {
                             whileHover={{
                                 y: -6,
                                 scale: 1.04,
-                                transition: { type: "spring", stiffness: 280, damping: 16 },
+                                transition: {
+                                    type: "spring",
+                                    stiffness: 280,
+                                    damping: 16,
+                                },
                             }}
                             className="absolute -bottom-6 -right-4 sm:-right-6 w-32 sm:w-40 h-24 sm:h-28 shadow-lg hidden sm:block will-change-transform overflow-hidden"
                         >
@@ -127,7 +138,11 @@ export default function About({ data }) {
                             initial={{ opacity: 0, scale: 0.6 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true, amount: 0.25 }}
-                            transition={{ duration: 1.5, ease: EASE_OUT_EXPO, delay: 0.9 }}
+                            transition={{
+                                duration: 1.5,
+                                ease: EASE_OUT_EXPO,
+                                delay: 0.9,
+                            }}
                         />
                     </motion.div>
 
@@ -168,8 +183,13 @@ export default function About({ data }) {
                                     variants={featureItemVariants}
                                     whileHover={{
                                         x: 4,
-                                        borderColor: "var(--color-accent, currentColor)",
-                                        transition: { type: "spring", stiffness: 300, damping: 18 },
+                                        borderColor:
+                                            "var(--color-accent, currentColor)",
+                                        transition: {
+                                            type: "spring",
+                                            stiffness: 300,
+                                            damping: 18,
+                                        },
                                     }}
                                     className="border-l-2 border-accent pl-4 will-change-transform"
                                 >
@@ -187,7 +207,11 @@ export default function About({ data }) {
                             variants={textItemVariants}
                             whileHover={{ x: 6 }}
                             whileTap={{ scale: 0.97 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 300,
+                                damping: 18,
+                            }}
                             className="inline-flex items-center text-primary font-light tracking-wider uppercase text-sm hover:text-accent transition-colors"
                             href={data.cta.href}
                         >
@@ -217,6 +241,6 @@ export default function About({ data }) {
                     </motion.div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }

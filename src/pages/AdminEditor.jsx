@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { adminStatus, adminLogout, updateSection } from "../api/admin";
 import { getContent } from "../api/content";
-import { Button, Card, Input, Textarea, Title, Badge, SidebarItem } from "../components/NeoUI";
+import {
+    Button,
+    Card,
+    Input,
+    Textarea,
+    Title,
+    Badge,
+    SidebarItem,
+} from "../components/NeoUI";
 
 const SECTION_LABELS = {
     siteTitle: "Site Title",
@@ -20,7 +28,14 @@ const SECTION_LABELS = {
     footer: "Footer",
 };
 
-function Field({ label, value, onChange, type = "text", multiline = false, rows = 3 }) {
+function Field({
+    label,
+    value,
+    onChange,
+    type = "text",
+    multiline = false,
+    rows = 3,
+}) {
     return (
         <div>
             <label className="block text-[10px] font-black uppercase tracking-widest text-neo-black mb-2 border-l-4 border-neo-yellow pl-2">
@@ -71,8 +86,10 @@ function ObjectEditor({ data, onChange, depth = 0 }) {
                         <div className="flex items-center justify-between mb-3">
                             <Badge variant="dark">Item #{i + 1}</Badge>
                             <button
-                                onClick={() => onChange(data.filter((_, idx) => idx !== i))}
-                                className="px-3 py-1 text-[10px] font-black uppercase tracking-widest border-2 border-neo-black bg-neo-red text-white hover:bg-red-700 transition active:translate-x-px active:translate-y-px"
+                                onClick={() =>
+                                    onChange(data.filter((_, idx) => idx !== i))
+                                }
+                                className="px-3 py-1 text-[10px] font-black uppercase tracking-widest border-2 border-neo-black bg-neo-red text-white hover:bg-red-700 transition active:translate-x-px active:translate-y-px cursor-pointer"
                             >
                                 Remove
                             </button>
@@ -90,7 +107,7 @@ function ObjectEditor({ data, onChange, depth = 0 }) {
                 ))}
                 <button
                     onClick={() => onChange([...data, {}])}
-                    className="w-full px-4 py-3 text-xs font-black uppercase tracking-widest border-2 border-neo-black bg-neo-yellow text-neo-black shadow-neo-sm hover:shadow-neo transition active:translate-x-px active:translate-y-px"
+                    className="w-full px-4 py-3 text-xs font-black uppercase tracking-widest border-2 border-neo-black bg-neo-yellow text-neo-black shadow-neo-sm hover:shadow-neo transition active:translate-x-px active:translate-y-px cursor-pointer"
                 >
                     + Add item
                 </button>
@@ -111,11 +128,16 @@ function ObjectEditor({ data, onChange, depth = 0 }) {
                             <Field
                                 label={key}
                                 value={String(value)}
-                                multiline={typeof value === "string" && value.length > 60}
+                                multiline={
+                                    typeof value === "string" &&
+                                    value.length > 60
+                                }
                                 onChange={(v) => {
                                     let parsed = v;
-                                    if (typeof value === "number") parsed = Number(v) || 0;
-                                    else if (typeof value === "boolean") parsed = v === "true";
+                                    if (typeof value === "number")
+                                        parsed = Number(v) || 0;
+                                    else if (typeof value === "boolean")
+                                        parsed = v === "true";
                                     onChange({ ...data, [key]: parsed });
                                 }}
                             />
@@ -132,7 +154,9 @@ function ObjectEditor({ data, onChange, depth = 0 }) {
                                     <ObjectEditor
                                         data={value}
                                         depth={depth + 1}
-                                        onChange={(v) => onChange({ ...data, [key]: v })}
+                                        onChange={(v) =>
+                                            onChange({ ...data, [key]: v })
+                                        }
                                     />
                                 </div>
                             </details>
@@ -180,7 +204,9 @@ export default function AdminEditor() {
             if (content?.siteTitle) {
                 document.title = content.siteTitle;
             }
-            setSectionDraft(JSON.parse(JSON.stringify(content[activeSection] ?? {})));
+            setSectionDraft(
+                JSON.parse(JSON.stringify(content[activeSection] ?? {})),
+            );
         }
     }, [content, activeSection]);
 
@@ -271,10 +297,11 @@ export default function AdminEditor() {
                             <div className="flex items-center gap-3">
                                 {message && (
                                     <span
-                                        className={`px-3 py-1 text-xs font-black uppercase tracking-widest border-2 border-neo-black ${message.startsWith("✓")
-                                            ? "bg-neo-green text-white"
-                                            : "bg-neo-red text-white"
-                                            }`}
+                                        className={`px-3 py-1 text-xs font-black uppercase tracking-widest border-2 border-neo-black ${
+                                            message.startsWith("✓")
+                                                ? "bg-neo-green text-white"
+                                                : "bg-neo-red text-white"
+                                        }`}
                                     >
                                         {message}
                                     </span>
@@ -283,7 +310,7 @@ export default function AdminEditor() {
                                     variant="primary"
                                     onClick={onSave}
                                     disabled={saving}
-                                    className="px-5 py-2 text-sm"
+                                    className="px-5 py-2 text-sm cursor-pointer"
                                 >
                                     {saving ? "Saving..." : "Save changes"}
                                 </Button>
@@ -301,7 +328,8 @@ export default function AdminEditor() {
                             <div className="flex items-start gap-3">
                                 <Badge variant="yellow">Heads up</Badge>
                                 <p className="text-sm font-medium leading-relaxed">
-                                    Changes are saved to the D1 database immediately. Refresh the{" "}
+                                    Changes are saved to the D1 database
+                                    immediately. Refresh the{" "}
                                     <a
                                         href="/"
                                         className="underline font-black uppercase tracking-wider"

@@ -206,18 +206,18 @@ export default function AdminEditor() {
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                    <h1 className="text-lg font-serif text-primary">Blue Logistics — Admin</h1>
+                    <h1 className="text-lg font-serif text-primary">{content.siteTitle} — Admin</h1>
                     <a
                         href="/"
                         target="_blank"
                         className="text-xs text-accent hover:underline uppercase tracking-wider"
                     >
-                    ↗ Preview live site
+                        ↗ Preview live site
                     </a>
                 </div>
                 <button
                     onClick={onLogout}
-                    className="text-xs uppercase tracking-wider text-gray-500 hover:text-primary"
+                    className="text-xs uppercase tracking-wider text-gray-500 hover:text-primary cursor-pointer"
                 >
                     Logout
                 </button>
@@ -232,11 +232,10 @@ export default function AdminEditor() {
                         <button
                             key={key}
                             onClick={() => setActiveSection(key)}
-                            className={`block w-full text-left px-3 py-2 mb-1 text-sm transition ${
-                                activeSection === key
-                                    ? "bg-primary text-white"
-                                    : "text-gray-700 hover:bg-gray-100"
-                            }`}
+                            className={`block w-full text-left px-3 py-2 mb-1 text-sm transition ${activeSection === key
+                                ? "bg-primary text-white"
+                                : "text-gray-700 hover:bg-gray-100"
+                                }`}
                         >
                             {label}
                         </button>
